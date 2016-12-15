@@ -54,8 +54,8 @@ public class CatalogActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart(){
-        super. onStart();
+    protected void onStart() {
+        super.onStart();
         displayDatabaseInfo();
     }
 
@@ -68,9 +68,28 @@ public class CatalogActivity extends AppCompatActivity {
         // Create and/or open a database to read from it
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
-        // Perform this raw SQL query "SELECT * FROM pets"
-        // to get a Cursor that contains all rows from the pets table.
-        Cursor cursor = db.rawQuery("SELECT * FROM " + PetEntry.TABLE_NAME, null);
+//        // Perform this raw SQL query "SELECT * FROM pets"
+//        // to get a Cursor that contains all rows from the pets table.
+//        Cursor cursor = db.rawQuery("SELECT * FROM " + PetEntry.TABLE_NAME, null);
+
+        String[] projection = {
+                PetEntry._ID,
+                PetEntry.COLUMN_PET_NAME,
+                PetEntry.COLUMN_PET_BREED,
+                PetEntry.COLUMN_PET_WEIGHT,
+                PetEntry.COLUMN_PET_WEIGHT
+        };
+
+        Cursor cursor = db.query(
+                PetEntry.TABLE_NAME,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+
         try {
             // Display the number of rows in the Cursor (which reflects the number of rows in the
             // pets table in the database).
@@ -86,7 +105,7 @@ public class CatalogActivity extends AppCompatActivity {
     /**
      * Helper method to insert hardcoded pet data into the database. For debugging purposes only.
      */
-    private void insertPet(){
+    private void insertPet() {
 
         // Gets the database in write mode
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
