@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,12 +45,18 @@ public class CatalogActivity extends AppCompatActivity {
         //and pass the context, which is the current activity.
         mDbHelper = new PetDbHelper(this);
 
-        displayDatabaseInfo();
+        //displayDatabaseInfo();
 
         //PetDbHelper mDbHelper = new PetDbHelper(this);
 
         //SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
+    }
+
+    @Override
+    protected void onStart(){
+        super. onStart();
+        displayDatabaseInfo();
     }
 
     /**
@@ -100,6 +107,8 @@ public class CatalogActivity extends AppCompatActivity {
         // there are no values).
         // The third argument is the ContentValues object containing the info for Toto.
         long newRowId = db.insert(PetEntry.TABLE_NAME, null, values);
+
+        Log.v("CatalogActivity", "New row ID " + newRowId);
 
     }
 
