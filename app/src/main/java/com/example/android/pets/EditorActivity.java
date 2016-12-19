@@ -113,6 +113,7 @@ public class EditorActivity extends AppCompatActivity {
             // Because AdapterView is an abstract class, onNothingSelected must be defined
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
                 mGender = 0; // Unknown
             }
         });
@@ -137,20 +138,20 @@ public class EditorActivity extends AppCompatActivity {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         // Create a ContentValues object where column names are the keys,
-        // and Toto's pet attributes are the values.
+        // and user input attributes are the values.
         ContentValues values = new ContentValues();
         values.put(PetEntry.COLUMN_PET_NAME, nameString);
         values.put(PetEntry.COLUMN_PET_BREED, breedString);
         values.put(PetEntry.COLUMN_PET_GENDER, mGender);
         values.put(PetEntry.COLUMN_PET_WEIGHT, weightInt);
 
-        // Insert a new row for Toto in the database, returning the ID of that row.
+        // Insert a new row for user input in the database, returning the ID of that row.
         // The first argument for db.insert() is the pets table name.
         // The second argument provides the name of a column in which the framework
         // can insert NULL in the event that the ContentValues is empty (if
         // this is set to "null", then the framework will not insert a row when
         // there are no values).
-        // The third argument is the ContentValues object containing the info for Toto.
+        // The third argument is the ContentValues object containing the info for user input.
         long newRowId = db.insert(PetEntry.TABLE_NAME, null, values);
 
         // Show a toast message depending on whether or not the insertion was successful
