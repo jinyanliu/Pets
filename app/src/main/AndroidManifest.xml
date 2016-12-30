@@ -10,8 +10,8 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<manifest package="com.example.android.pets"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.example.android.pets">
 
     <application
         android:allowBackup="true"
@@ -30,13 +30,17 @@
         <activity
             android:name=".EditorActivity"
             android:label="@string/editor_activity_title_new_pet"
-            android:theme="@style/EditorTheme"
-            android:parentActivityName=".CatalogActivity" >
+            android:parentActivityName=".CatalogActivity"
+            android:theme="@style/EditorTheme">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".CatalogActivity" />
+                android:value=".CatalogActivity"/>
         </activity>
+        <provider
+            android:name=".data.PetProvider"
+            android:authorities="com.example.android.pets"
+            android:exported="false"/>
     </application>
 
 </manifest>
