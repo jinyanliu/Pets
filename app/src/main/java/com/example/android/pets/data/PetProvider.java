@@ -14,7 +14,14 @@ import android.net.Uri;
  */
 public class PetProvider extends ContentProvider {
 
-    /** Tag for the log messages */
+    /**
+     * Database helper that will provide us access to the database
+     */
+    private PetDbHelper mDbHelper;
+
+    /**
+     * Tag for the log messages
+     */
     public static final String LOG_TAG = PetProvider.class.getSimpleName();
 
     /**
@@ -25,6 +32,10 @@ public class PetProvider extends ContentProvider {
         // TODO: Create and initialize a PetDbHelper object to gain access to the pets database.
         // Make sure the variable is a global variable, so it can be referenced from other
         // ContentProvider methods.
+
+        // To access our database, we instantiate our subclass of SQLiteOpenHelper
+        // and pass the context, which is the current activity.
+        mDbHelper = new PetDbHelper(getContext());
         return true;
     }
 
