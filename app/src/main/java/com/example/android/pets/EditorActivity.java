@@ -16,12 +16,11 @@
 package com.example.android.pets;
 
 import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,10 +28,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.android.pets.data.PetContract.PetEntry;
-import com.example.android.pets.data.PetDbHelper;
 
 /**
  * Allows user to create a new pet or edit an existing one.
@@ -131,11 +128,11 @@ public class EditorActivity extends AppCompatActivity {
         String weightString = mWeightEditText.getText().toString().trim();
         int weightInt = Integer.parseInt(weightString);
 
-        // Create database helper
-        PetDbHelper mDbHelper = new PetDbHelper(this);
-
-        // Gets the database in write mode
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+//        // Create database helper
+//        PetDbHelper mDbHelper = new PetDbHelper(this);
+//
+//        // Gets the database in write mode
+//        SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         // Create a ContentValues object where column names are the keys,
         // and user input attributes are the values.
@@ -145,25 +142,29 @@ public class EditorActivity extends AppCompatActivity {
         values.put(PetEntry.COLUMN_PET_GENDER, mGender);
         values.put(PetEntry.COLUMN_PET_WEIGHT, weightInt);
 
-        // Insert a new row for user input in the database, returning the ID of that row.
-        // The first argument for db.insert() is the pets table name.
-        // The second argument provides the name of a column in which the framework
-        // can insert NULL in the event that the ContentValues is empty (if
-        // this is set to "null", then the framework will not insert a row when
-        // there are no values).
-        // The third argument is the ContentValues object containing the info for user input.
-        long newRowId = db.insert(PetEntry.TABLE_NAME, null, values);
+//        // Insert a new row for user input in the database, returning the ID of that row.
+//        // The first argument for db.insert() is the pets table name.
+//        // The second argument provides the name of a column in which the framework
+//        // can insert NULL in the event that the ContentValues is empty (if
+//        // this is set to "null", then the framework will not insert a row when
+//        // there are no values).
+//        // The third argument is the ContentValues object containing the info for user input.
+//        long newRowId = db.insert(PetEntry.TABLE_NAME, null, values);
 
-        // Show a toast message depending on whether or not the insertion was successful
-        if (newRowId == -1) {
-            // If the row ID is -1, then there was an error with insertion.
-            Toast.makeText(this, "Error with saving pet", Toast.LENGTH_SHORT).show();
-        } else {
-            //Otherwise, the insertion was successful and we can display a toast with the row ID.
-            Toast.makeText(this, "Pet saved with row id: " + newRowId, Toast.LENGTH_SHORT).show();
-        }
+        Uri insertUri = getContentResolver().insert(
+                PetEntry.CONTENT_URI,
+                values);
 
-        Log.v("CatalogActivity", "New row ID " + newRowId);
+//        // Show a toast message depending on whether or not the insertion was successful
+//        if (newRowId == -1) {
+//            // If the row ID is -1, then there was an error with insertion.
+//            Toast.makeText(this, "Error with saving pet", Toast.LENGTH_SHORT).show();
+//        } else {
+//            //Otherwise, the insertion was successful and we can display a toast with the row ID.
+//            Toast.makeText(this, "Pet saved with row id: " + newRowId, Toast.LENGTH_SHORT).show();
+//        }
+//
+//        Log.v("CatalogActivity", "New row ID " + newRowId);
     }
 
     @Override
