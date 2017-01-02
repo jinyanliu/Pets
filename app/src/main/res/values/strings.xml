@@ -60,8 +60,8 @@
     <string name="gender_female">Female</string>
 
     <!-- Toast message for saving error when inserting a pet [CHAR LIMIT=20] -->
-    <string name="toast_saving_error">Error with saving pet.</string>
+    <string name="editor_insert_pet_failed">Error with saving pet</string>
 
     <!-- Toast message for saving success when inserting a pet [CHAR LIMIT=20] -->
-    <string name="toast_saving_success">Pet saved.</string>
+    <string name="editor_insert_pet_successful">Pet saved</string>
 </resources>

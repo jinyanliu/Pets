@@ -8,9 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.android.pets.R;
 import com.example.android.pets.data.PetContract.PetEntry;
 
 /**
@@ -24,6 +22,9 @@ public class PetProvider extends ContentProvider {
 
     /**
      * Tag for the log messages
+     * Since we'll be logging multiple times throughout this file, it would be ideal to create a log
+     * tag as a global constant variable, so all log messages from the PetProvider will have the same
+     * log tag identifier when you are reading the system logs.
      */
     public static final String LOG_TAG = PetProvider.class.getSimpleName();
 
@@ -163,16 +164,22 @@ public class PetProvider extends ContentProvider {
         // Insert a new pet into the pets database table with the given ContentValues
         long id = database.insert(PetEntry.TABLE_NAME, null, values);
 
-        // Show a toast message depending on whether or not the insertion was successful
+        // If the ID is -1, then the insertion failed. Log an error and return null.
         if (id == -1) {
-            // If the row ID is -1, then there was an error with insertion.
-            Toast.makeText(getContext(), R.string.toast_saving_error, Toast.LENGTH_SHORT).show();
-        } else {
-            //Otherwise, the insertion was successful and we can display a toast with the row ID.
-            Toast.makeText(getContext(), R.string.toast_saving_success, Toast.LENGTH_SHORT).show();
+            Log.e(LOG_TAG, "Failed to insert row for " + uri);
+            return null;
         }
 
-        Log.v("PetProvider", "New row ID " + id);
+//        // Show a toast message depending on whether or not the insertion was successful
+//        if (id == -1) {
+//            // If the row ID is -1, then there was an error with insertion.
+//            Toast.makeText(getContext(), R.string.toast_saving_error, Toast.LENGTH_SHORT).show();
+//        } else {
+//            //Otherwise, the insertion was successful and we can display a toast with the row ID.
+//            Toast.makeText(getContext(), R.string.toast_saving_success, Toast.LENGTH_SHORT).show();
+//        }
+//
+//        Log.v("PetProvider", "New row ID " + id);
 
         // Once we know the ID of the new row in the table,
         // return the new URI with the ID appended to the end of it

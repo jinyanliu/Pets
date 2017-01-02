@@ -13,17 +13,16 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.android.pets.data.PetContract.PetEntry;
-import com.example.android.pets.data.PetDbHelper;
 
 /**
  * Displays list of pets that were entered and stored in the app.
  */
 public class CatalogActivity extends AppCompatActivity {
 
-    /**
-     * Database helper that will provide us access to the database
-     */
-    private PetDbHelper mDbHelper;
+//    /**
+//     * Database helper that will provide us access to the database
+//     */
+//    private PetDbHelper mDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +39,9 @@ public class CatalogActivity extends AppCompatActivity {
             }
         });
 
-        // To access our database, we instantiate our subclass of SQLiteOpenHelper
-        // and pass the context, which is the current activity.
-        mDbHelper = new PetDbHelper(this);
+//        // To access our database, we instantiate our subclass of SQLiteOpenHelper
+//        // and pass the context, which is the current activity.
+//        mDbHelper = new PetDbHelper(this);
     }
 
     @Override
@@ -159,7 +158,11 @@ public class CatalogActivity extends AppCompatActivity {
 //        // The third argument is the ContentValues object containing the info for Toto.
 //        long newRowId = db.insert(PetEntry.TABLE_NAME, null, values);
 
-        Uri insertUri = getContentResolver().insert(
+        // Insert a new row for Toto into the provider using the ContentResolver.
+        // Use the {@link PetEntry#CONTENT_URI} to indicate that we want to insert
+        // into pets database table.
+        // Receive the new content URI that will allow us to access Toto's data in the future.
+        Uri newUri = getContentResolver().insert(
                 PetEntry.CONTENT_URI,
                 values);
     }
