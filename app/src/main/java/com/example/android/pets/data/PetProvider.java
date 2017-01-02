@@ -106,11 +106,11 @@ public class PetProvider extends ContentProvider {
                 cursor = database.query(
                         PetEntry.TABLE_NAME,   // The table to query
                         projection,            // The columns to return
-                        null,                  // The columns for the WHERE clause
-                        null,                  // The values for the WHERE clause
+                        selection,                  // The columns for the WHERE clause
+                        selectionArgs,                  // The values for the WHERE clause
                         null,                  // Don't group the rows
                         null,                  // Don't filter by row groups
-                        null);                 // The sort order
+                        sortOrder);                 // The sort order
                 break;
             case PET_ID:
                 // For the PET_ID code, extract out the ID from the URI.
