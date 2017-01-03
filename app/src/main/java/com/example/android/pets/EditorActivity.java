@@ -125,9 +125,15 @@ public class EditorActivity extends AppCompatActivity {
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
         String nameString = mNameEditText.getText().toString().trim();
+        if (nameString.isEmpty()) {
+            throw new IllegalArgumentException("Name can not be empty!");
+        }
         String breedString = mBreedEditText.getText().toString().trim();
         String weightString = mWeightEditText.getText().toString().trim();
-        int weightInt = Integer.parseInt(weightString);
+        Integer weightInt = null;
+        if (!weightString.isEmpty()) {
+            weightInt = Integer.parseInt(weightString);
+        }
 
 //        // Create database helper
 //        PetDbHelper mDbHelper = new PetDbHelper(this);
@@ -141,7 +147,9 @@ public class EditorActivity extends AppCompatActivity {
         values.put(PetEntry.COLUMN_PET_NAME, nameString);
         values.put(PetEntry.COLUMN_PET_BREED, breedString);
         values.put(PetEntry.COLUMN_PET_GENDER, mGender);
-        values.put(PetEntry.COLUMN_PET_WEIGHT, weightInt);
+        if (weightInt != null) {
+            values.put(PetEntry.COLUMN_PET_WEIGHT, weightInt);
+        }
 
 //        // Insert a new row for user input in the database, returning the ID of that row.
 //        // The first argument for db.insert() is the pets table name.
@@ -184,7 +192,12 @@ public class EditorActivity extends AppCompatActivity {
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
                 // Save pet to database
-                insertPet();
+                try {
+                    insertPet();
+                } catch (IllegalArgumentException e) {
+                    Toast.makeText(this.getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    return true;
+                }
                 // Exit activity
                 finish();
                 return true;
