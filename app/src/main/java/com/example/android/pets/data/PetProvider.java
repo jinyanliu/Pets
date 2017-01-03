@@ -160,7 +160,7 @@ public class PetProvider extends ContentProvider {
 
         // Check that the name is not null
         String name = values.getAsString(PetEntry.COLUMN_PET_NAME);
-        if (name == null) {
+        if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Pet requires a name");
         }
 
@@ -172,7 +172,7 @@ public class PetProvider extends ContentProvider {
 
         // If the weight is provided, check that it's greater than or equal to 0 kg
         Integer weight = values.getAsInteger(PetEntry.COLUMN_PET_WEIGHT);
-        if (weight != null && weight < 0){
+        if (weight != null && weight < 0) {
             throw new IllegalArgumentException("Pet requires valid weight");
         }
 
