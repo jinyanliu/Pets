@@ -12,8 +12,7 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
-import static com.example.android.pets.data.PetContract.PetEntry.COLUMN_PET_BREED;
-import static com.example.android.pets.data.PetContract.PetEntry.COLUMN_PET_NAME;
+import com.example.android.pets.data.PetContract;
 
 /**
  * {@link PetCursorAdapter} is an adapter for a list or grid view
@@ -58,14 +57,29 @@ public class PetCursorAdapter extends CursorAdapter {
      */
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        // Find fields to populate in inflated template
-        TextView namePet = (TextView) view. findViewById(R.id.name);
-        TextView summaryPet = (TextView) view.findViewById(R.id.summary);
-        // Extract properties from cursor
-        String name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PET_NAME));
-        String summary = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PET_BREED));
-        // Populate fields with extracted properties
-        namePet.setText(name);
-        summaryPet.setText(summary);
+
+        // Find individual views that we want to modify in the list item layout
+        TextView nameTextView = (TextView) view.findViewById(R.id.name);
+        TextView summaryTextView = (TextView) view.findViewById(R.id.summary);
+
+//        // Extract properties from cursor
+//        String name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PET_NAME));
+//        String summary = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PET_BREED));
+//
+//        // Populate fields with extracted properties
+//        namePet.setText(name);
+//        summaryPet.setText(summary);
+
+        // Find the columns of pet attributes that we're interested in
+        int nameColumnIndex = cursor.getColumnIndex(PetContract.PetEntry.COLUMN_PET_NAME);
+        int breedColumnIndex = cursor.getColumnIndex(PetContract.PetEntry.COLUMN_PET_BREED);
+
+        // Read the pet attributes from the Cursor for the current pet
+        String petName = cursor.getString(nameColumnIndex);
+        String petBreed = cursor.getString(breedColumnIndex);
+
+        // Update the TextViews with the attributes for the current pet
+        nameTextView.setText(petName);
+        summaryTextView.setText(petBreed);
     }
 }

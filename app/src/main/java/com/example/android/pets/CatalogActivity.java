@@ -87,12 +87,12 @@ public class CatalogActivity extends AppCompatActivity {
                 null,                  // Selection criteria
                 null);                 // The sort order for the returned rows
 
-        // Find ListViews to populate
-        ListView petItems = (ListView) findViewById(R.id.list_view_pet);
-        // Setup cursor adapter using cursor returned from the provider
-        PetCursorAdapter petAdapter = new PetCursorAdapter(this, cursor);
-        // Attach cursor adapter to the ListView
-        petItems.setAdapter(petAdapter);
+        // Find the ListView which will be populated with the pet data
+        ListView petListView = (ListView) findViewById(R.id.list_view_pet);
+        // Setup an adapter to create a list item for each row of pet data in the Cursor.
+        PetCursorAdapter adapter = new PetCursorAdapter(this, cursor);
+        // Attach the  adapter to the ListView
+        petListView.setAdapter(adapter);
 
 //        TextView displayView = (TextView) findViewById(R.id.text_view_pet);
 //
