@@ -70,4 +70,10 @@
 
     <!-- Subtitle text for the empty view that prompts the user to add a pet [CHAR LIMIT=20] -->
     <string name="empty_view_subtitle_text">Get started by adding a pet</string>
+
+    <!-- Title for the app bar of EditorActivity when adding a pet [CHAR LIMIT=20] -->
+    <string name="editor_activity_title_add_pet">Add a Pet</string>
+
+    <!-- Title for the app bar of EditorActivity when editing a pet [CHAR LIMIT=20] -->
+    <string name="editor_activity_title_edit_pet">Edit Pet</string>
 </resources>
