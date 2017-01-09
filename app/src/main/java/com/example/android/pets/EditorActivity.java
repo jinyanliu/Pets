@@ -165,6 +165,17 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         }
         String breedString = mBreedEditText.getText().toString().trim();
         String weightString = mWeightEditText.getText().toString().trim();
+
+        // Check if this is supposed to be a new pet
+        // and check if all the fields in the editor are blank
+        if (mCurrentPetUri == null &&
+                TextUtils.isEmpty(nameString) && TextUtils.isEmpty(breedString) &&
+                TextUtils.isEmpty(weightString) && mGender == PetEntry.GENDER_UNKNOWN) {
+            // Since no fields were modified, we can return early without creating a new pet.
+            // No need to create ContentValues and no need to do any ContentProvider operations.
+            return;
+        }
+
         Integer weightInt = null;
         if (!weightString.isEmpty()) {
             weightInt = Integer.parseInt(weightString);
@@ -185,6 +196,14 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         if (weightInt != null) {
             values.put(PetEntry.COLUMN_PET_WEIGHT, weightInt);
         }
+
+//        // If the weight is not provided by the user, don't try to parse the string into an
+//        // interger value. Use 0 by default.
+//        int weight = 0;
+//        if (!TextUtils.isEmpty(weightString)){
+//            weight = Integer. parseInt(weightString);
+//        }
+//        values.put(PetEntry.COLUMN_PET_WEIGHT, weight);
 
 //        // Insert a new row for user input in the database, returning the ID of that row.
 //        // The first argument for db.insert() is the pets table name.
