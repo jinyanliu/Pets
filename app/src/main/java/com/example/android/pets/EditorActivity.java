@@ -115,11 +115,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             setTitle(getString(R.string.editor_activity_title_add_pet));
 
             // Invalidate the options menu, so the "Delete" menu option can be hidden.
-            // (It doesn't make senese to delete a pet that hasn't bben created yet.)
+            // (It doesn't make sense to delete a pet that hasn't been created yet.)
             invalidateOptionsMenu();
 
         } else {
-            // Otherwise this is an existing pet, so chagne the app bar to say "Edit a Pet"
+            // Otherwise this is an existing pet, so change the app bar to say "Edit a Pet"
             setTitle(getString(R.string.editor_activity_title_edit_pet));
 
             /**
@@ -267,7 +267,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
             // Otherwise this is an EXISTING pet, so update the pet with content URI: mCurrentPetUri
             // and pass in the new ContentValues. Pass in null for the selection and selection args
-            // because mCurrentPetUri will already identify the corrent row in the database that
+            // because mCurrentPetUri will already identify the correct row in the database that
             // we want to modify.
             int rowsAffected = getContentResolver().update(mCurrentPetUri, values, null, null);
 

@@ -55,7 +55,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         // Find the ListView which will be populated with the pet data
         ListView petListView = (ListView) findViewById(R.id.list_view_pet);
 
-        // Find and set empty view on the ListView, so that it only shows when the lsit has
+        // Find and set empty view on the ListView, so that it only shows when the list has
         // 0 items.
         View emptyView = findViewById(R.id.empty_view);
         petListView.setEmptyView(emptyView);
@@ -77,7 +77,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
                 Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
 
                 // Form the content URI that represents the specific pet that was clicked on,
-                // by appedning the "id" (passed as input to this method) onto the
+                // by appending the "id" (passed as input to this method) onto the
                 // {@link PetEntry#CONTENT_URI}.
                 // For example, the URI would be "content://com.example.android.pets/pets/2"
                 // if the pet with ID 2 was clicked on.
@@ -292,13 +292,13 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 
-        // Update {@link PetCursorAdapter} with this new curosr containing updated pet data
+        // Update {@link PetCursorAdapter} with this new cursor containing updated pet data
         mCursorAdapter.swapCursor(data);
     }
 
     /**
      * Invoked when the CursorLoader is being reset. For example, this is called if the data in the
-     * privider changes and the Cursor becomes stale.
+     * provider changes and the Cursor becomes stale.
      */
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
